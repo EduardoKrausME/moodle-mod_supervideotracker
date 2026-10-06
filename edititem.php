@@ -25,7 +25,9 @@
 require('../../config.php');
 require_once($CFG->libdir . '/formslib.php');
 
+use local_video_bridge\progress\manager as bridge_progress_manager;
 use local_video_bridge\source\manager as source_manager;
+use mod_supervideotracker\local\progress_service;
 use mod_supervideotracker\form\item_form;
 
 $id = required_param('id', PARAM_INT);
@@ -76,6 +78,7 @@ if ($form->is_cancelled()) {
 
 if ($data = $form->get_data()) {
     $previoussource = $item ? (string)$item->source : null;
+    $previousmediahash = $item ? progress_service::media($item)->get_mediahash() : null;
     $manager->normalise_record($data);
     $now = time();
 
@@ -99,6 +102,24 @@ if ($data = $form->get_data()) {
     }
 
     $manager->save_files_for_media($data, $context, $savedid, $previoussource);
+
+    if ($previousmediahash !== null) {
+        $newmedia = (object)[
+            'id' => $savedid,
+            'source' => $data->source,
+            'sourceconfig' => $data->sourceconfig,
+        ];
+        $newmediahash = progress_service::media($newmedia)->get_mediahash();
+        if ($newmediahash !== $previousmediahash) {
+            bridge_progress_manager::delete_consumer_media(
+                $context->id,
+                'mod_supervideotracker',
+                (int)$activity->id,
+                $previousmediahash
+            );
+        }
+    }
+
     redirect(
         new moodle_url('/mod/supervideotracker/manage.php', ['id' => $cm->id]),
         get_string('changessaved')
