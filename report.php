@@ -64,7 +64,7 @@ foreach ($users as $user) {
 
     foreach ($items as $item) {
         $row = $userprogress[(int)$item->id] ?? null;
-        $status = progress_service::status($item, $row, true);
+        $status = progress_service::report_status($item, $row);
         if (isset($counts[$status])) {
             $counts[$status]++;
         }
