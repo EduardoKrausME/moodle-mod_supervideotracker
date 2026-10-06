@@ -10,7 +10,7 @@ It is also not a sequence. A sequence primarily models order and prerequisites b
 
 The plugin requires:
 
-- `local_video_bridge >= 2026100604`
+- `local_video_bridge >= 2026100617`
 - repository: https://github.com/EduardoKrausME/moodle-local_video_bridge
 
 Providers are never implemented inside this module. Every item is represented by
