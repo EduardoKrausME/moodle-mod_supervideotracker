@@ -29,6 +29,9 @@ use mod_supervideotracker\local\progress_service;
 
 /**
  * Tests package progress and completion calculations.
+ *
+ * @package mod_supervideotracker
+ * @covers \mod_supervideotracker\local\progress_service
  */
 final class progress_service_test extends advanced_testcase {
     /**
