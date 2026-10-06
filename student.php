@@ -75,7 +75,7 @@ foreach ($items as $item) {
         ];
     }
 
-    $status = progress_service::status($item, $row, true);
+    $status = progress_service::report_status($item, $row);
     $details[] = [
         'title' => format_string($item->title),
         'percent' => $row ? (int)$row->percent : 0,
