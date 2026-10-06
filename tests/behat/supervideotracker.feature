@@ -21,4 +21,5 @@ Feature: Create and open a Super Video Tracker package
     When I add a "Super Video Tracker" activity to course "Compliance course" section "1" and I fill the form with:
       | Name | Mandatory training |
     Then I should see "Mandatory training"
-    And I should see "Overall progress"
+    When I follow "Mandatory training"
+    Then I should see "Overall progress"
