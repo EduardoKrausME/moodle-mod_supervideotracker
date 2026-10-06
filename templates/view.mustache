@@ -1,0 +1,56 @@
+{{!
+    @template mod_supervideotracker/view
+}}
+<div class="supervideotracker">
+    <div class="supervideotracker__header">
+        <div>
+            <h2>{{name}}</h2>
+            {{#hasintro}}<div class="mb-3">{{{intro}}}</div>{{/hasintro}}
+        </div>
+        <div class="supervideotracker__actions">
+            {{#canmanage}}<a class="btn btn-secondary" href="{{manageurl}}">{{#str}}managevideos, supervideotracker{{/str}}</a>{{/canmanage}}
+            {{#canreport}}<a class="btn btn-secondary" href="{{reporturl}}">{{#str}}report, supervideotracker{{/str}}</a>{{/canreport}}
+        </div>
+    </div>
+
+    <section class="supervideotracker__overall" aria-label="{{#str}}overallprogress, supervideotracker{{/str}}">
+        <div class="supervideotracker__overall-number">{{overall}}%</div>
+        <div class="supervideotracker__overall-body">
+            <strong>{{#str}}overallprogress, supervideotracker{{/str}}</strong>
+            <div class="progress mt-2" role="progressbar" aria-valuenow="{{overall}}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: {{overall}}%"></div>
+            </div>
+            <small>{{requiredcompleted}} / {{requiredcount}} {{#str}}completed, supervideotracker{{/str}}</small>
+        </div>
+    </section>
+
+    {{^hasitems}}
+        <div class="alert alert-info">{{#str}}novideos, supervideotracker{{/str}}</div>
+    {{/hasitems}}
+
+    {{#hasitems}}
+    <div class="supervideotracker__items">
+        {{#items}}
+        <article class="supervideotracker__item supervideotracker__item--{{statuskey}}">
+            <div class="supervideotracker__item-main">
+                <div class="supervideotracker__item-titleline">
+                    <h3>{{title}}</h3>
+                    <span class="badge {{#required}}badge-danger{{/required}}{{#optional}}badge-secondary{{/optional}}">{{requirement}}</span>
+                </div>
+                {{#description}}<p>{{description}}</p>{{/description}}
+                <div class="supervideotracker__meta">
+                    <span>{{#str}}duration, supervideotracker{{/str}}: {{duration}}</span>
+                    <span>{{#str}}lastview, supervideotracker{{/str}}: {{lastview}}</span>
+                    <span class="supervideotracker__status">{{status}}</span>
+                </div>
+                <div class="progress mt-2" role="progressbar" aria-valuenow="{{percent}}" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar" style="width: {{percent}}%"></div>
+                </div>
+            </div>
+            <div class="supervideotracker__item-percent">{{percent}}%</div>
+            {{#available}}<a class="btn btn-primary" href="{{url}}">{{#str}}openvideo, supervideotracker{{/str}}</a>{{/available}}
+        </article>
+        {{/items}}
+    </div>
+    {{/hasitems}}
+</div>
