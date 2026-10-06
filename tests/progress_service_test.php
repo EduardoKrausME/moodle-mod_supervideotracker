@@ -97,4 +97,41 @@ final class progress_service_test extends advanced_testcase {
         $this->assertTrue(progress_service::is_available($item, 200));
         $this->assertFalse(progress_service::is_available($item, 201));
     }
+
+    /**
+     * Completed media remains completed after its availability window closes.
+     *
+     * @return void
+     */
+    public function test_completed_status_survives_expired_window(): void {
+        $item = (object)[
+            'active' => 1,
+            'availablefrom' => 100,
+            'availableuntil' => 200,
+            'minpercent' => 80,
+        ];
+        $progress = (object)['percent' => 100];
+
+        $this->assertSame('completed', progress_service::status($item, $progress, 201));
+        $this->assertSame('completed', progress_service::report_status($item, $progress, 201));
+    }
+
+    /**
+     * Reports distinguish expired incomplete media from ordinary unavailability.
+     *
+     * @return void
+     */
+    public function test_report_marks_expired_incomplete_media_overdue(): void {
+        $item = (object)[
+            'active' => 1,
+            'availablefrom' => 100,
+            'availableuntil' => 200,
+            'minpercent' => 80,
+        ];
+        $progress = (object)['percent' => 50];
+
+        $this->assertSame('unavailable', progress_service::status($item, $progress, 201));
+        $this->assertSame('overdue', progress_service::report_status($item, $progress, 201));
+    }
+
 }
