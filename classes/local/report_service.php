@@ -45,7 +45,7 @@ final class report_service {
         if ($groupid > 0) {
             return get_enrolled_users(
                 $context,
-                'mod/supervideotracker:view',
+                'mod/supervideotracker:betracked',
                 $groupid,
                 'u.id,u.firstname,u.lastname,u.email',
                 'u.lastname ASC,u.firstname ASC'
@@ -54,7 +54,7 @@ final class report_service {
 
         $users = get_enrolled_users(
             $context,
-            'mod/supervideotracker:view',
+            'mod/supervideotracker:betracked',
             0,
             'u.id,u.firstname,u.lastname,u.email',
             'u.lastname ASC,u.firstname ASC'
@@ -89,7 +89,7 @@ final class report_service {
     public static function can_view_user(stdClass $cm, context_module $context, int $userid): bool {
         global $USER;
 
-        if (!is_enrolled($context, $userid, 'mod/supervideotracker:view', true)) {
+        if (!is_enrolled($context, $userid, 'mod/supervideotracker:betracked', true)) {
             return false;
         }
         if (groups_get_activity_groupmode($cm) !== SEPARATEGROUPS
