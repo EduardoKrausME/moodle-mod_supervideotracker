@@ -28,6 +28,7 @@ use mod_supervideotracker\local\progress_service;
 use mod_supervideotracker\local\report_service;
 
 $id = required_param('id', PARAM_INT);
+$page = optional_param('page', 0, PARAM_INT);
 $cm = get_coursemodule_from_id('supervideotracker', $id, 0, false, MUST_EXIST);
 $course = get_course($cm->course);
 $activity = $DB->get_record('supervideotracker', ['id' => $cm->instance], '*', MUST_EXIST);
@@ -51,7 +52,10 @@ $items = array_values($DB->get_records(
     ['activityid' => $activity->id, 'active' => 1],
     'position ASC, id ASC'
 ));
-$users = report_service::users($cm, $context);
+$allusers = report_service::users($cm, $context);
+$totalusers = count($allusers);
+$perpage = 100;
+$users = array_slice($allusers, $page * $perpage, $perpage, true);
 $userids = array_map('intval', array_keys($users));
 $matrix = progress_service::load_matrix($activity, $context, $items, $userids);
 
@@ -105,5 +109,6 @@ $data = [
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('reportmatrix', 'supervideotracker'));
 groups_print_activity_menu($cm, $PAGE->url);
+echo $OUTPUT->paging_bar($totalusers, $page, $perpage, $PAGE->url);
 echo $OUTPUT->render_from_template('mod_supervideotracker/report', $data);
 echo $OUTPUT->footer();
