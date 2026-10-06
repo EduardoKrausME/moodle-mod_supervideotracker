@@ -8,8 +8,8 @@
             {{#hasintro}}<div class="mb-3">{{{intro}}}</div>{{/hasintro}}
         </div>
         <div class="supervideotracker__actions">
-            {{#canmanage}}<a class="btn btn-secondary" href="{{manageurl}}">{{#str}}managevideos, supervideotracker{{/str}}</a>{{/canmanage}}
-            {{#canreport}}<a class="btn btn-secondary" href="{{reporturl}}">{{#str}}report, supervideotracker{{/str}}</a>{{/canreport}}
+            {{#canmanage}}<a class="btn btn-secondary" href="{{{manageurl}}}">{{#str}}managevideos, supervideotracker{{/str}}</a>{{/canmanage}}
+            {{#canreport}}<a class="btn btn-secondary" href="{{{reporturl}}}">{{#str}}report, supervideotracker{{/str}}</a>{{/canreport}}
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="supervideotracker__item-percent">{{percent}}%</div>
-            {{#available}}<a class="btn btn-primary" href="{{url}}">{{#str}}openvideo, supervideotracker{{/str}}</a>{{/available}}
+            {{#available}}<a class="btn btn-primary" href="{{{url}}}">{{#str}}openvideo, supervideotracker{{/str}}</a>{{/available}}
         </article>
         {{/items}}
     </div>

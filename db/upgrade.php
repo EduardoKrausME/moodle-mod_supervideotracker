@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version metadata for Super Video Tracker.
+ * Upgrade steps for Super Video Tracker.
  *
  * @package   mod_supervideotracker
  * @copyright 2026 Eduardo Kraus
@@ -24,11 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->component = 'mod_supervideotracker';
-$plugin->version = 2026100601;
-$plugin->release = '1.0.0';
-$plugin->requires = 2024100700;
-$plugin->maturity = MATURITY_BETA;
-$plugin->dependencies = [
-    'local_video_bridge' => 2026100604,
-];
+/**
+ * Executes Super Video Tracker database upgrades.
+ *
+ * @param int $oldversion Previously installed plugin version.
+ * @return bool
+ */
+function xmldb_supervideotracker_upgrade(int $oldversion): bool {
+    return true;
+}

@@ -30,11 +30,19 @@ require_once($CFG->dirroot . '/mod/supervideotracker/backup/moodle2/restore_supe
  * Restore task for Super Video Tracker.
  */
 class restore_supervideotracker_activity_task extends restore_activity_task {
-    /** @return void */
+    /**
+     * Defines activity-specific restore settings.
+     *
+     * @return void
+     */
     protected function define_my_settings(): void {
     }
 
-    /** @return void */
+    /**
+     * Adds the activity structure restore step.
+     *
+     * @return void
+     */
     protected function define_my_steps(): void {
         $this->add_step(new restore_supervideotracker_activity_structure_step(
             'supervideotracker_structure',
@@ -42,22 +50,38 @@ class restore_supervideotracker_activity_task extends restore_activity_task {
         ));
     }
 
-    /** @return array */
+    /**
+     * Defines content fields decoded during restore.
+     *
+     * @return array
+     */
     public static function define_decode_contents(): array {
         return [];
     }
 
-    /** @return array */
+    /**
+     * Defines activity link rewrite rules.
+     *
+     * @return array
+     */
     public static function define_decode_rules(): array {
         return [];
     }
 
-    /** @return array */
+    /**
+     * Defines activity log restore rules.
+     *
+     * @return array
+     */
     public static function define_restore_log_rules(): array {
         return [];
     }
 
-    /** @return array */
+    /**
+     * Defines course-level log restore rules.
+     *
+     * @return array
+     */
     public static function define_restore_log_rules_for_course(): array {
         return [];
     }

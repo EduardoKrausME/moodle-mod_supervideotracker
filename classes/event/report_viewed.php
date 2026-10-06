@@ -39,12 +39,20 @@ final class report_viewed extends \core\event\base {
         $this->data['objecttable'] = 'supervideotracker';
     }
 
-    /** @return string Event name. */
+    /**
+     * Returns the localized event name.
+     *
+     * @return string
+     */
     public static function get_name(): string {
         return get_string('eventreportviewed', 'supervideotracker');
     }
 
-    /** @return string Description. */
+    /**
+     * Returns the event description.
+     *
+     * @return string
+     */
     public function get_description(): string {
         return 'The user with id ' . $this->userid . ' triggered report_viewed in Super Video Tracker.';
     }

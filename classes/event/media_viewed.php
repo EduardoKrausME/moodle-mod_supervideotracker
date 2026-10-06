@@ -39,12 +39,20 @@ final class media_viewed extends \core\event\base {
         $this->data['objecttable'] = 'supervideotracker_items';
     }
 
-    /** @return string Event name. */
+    /**
+     * Returns the localized event name.
+     *
+     * @return string
+     */
     public static function get_name(): string {
         return get_string('eventmediaviewed', 'supervideotracker');
     }
 
-    /** @return string Description. */
+    /**
+     * Returns the event description.
+     *
+     * @return string
+     */
     public function get_description(): string {
         return 'The user with id ' . $this->userid . ' triggered media_viewed in Super Video Tracker.';
     }

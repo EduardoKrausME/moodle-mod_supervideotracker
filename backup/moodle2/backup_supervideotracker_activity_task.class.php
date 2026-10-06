@@ -30,11 +30,19 @@ require_once($CFG->dirroot . '/mod/supervideotracker/backup/moodle2/backup_super
  * Backup task for Super Video Tracker.
  */
 class backup_supervideotracker_activity_task extends backup_activity_task {
-    /** @return void */
+    /**
+     * Defines activity-specific backup settings.
+     *
+     * @return void
+     */
     protected function define_my_settings(): void {
     }
 
-    /** @return void */
+    /**
+     * Adds the activity structure backup step.
+     *
+     * @return void
+     */
     protected function define_my_steps(): void {
         $this->add_step(new backup_supervideotracker_activity_structure_step(
             'supervideotracker_structure',
