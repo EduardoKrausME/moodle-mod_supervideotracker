@@ -22,7 +22,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
 
 /**
  * Executes Super Video Tracker database upgrades.
@@ -31,5 +30,9 @@ defined('MOODLE_INTERNAL') || die;
  * @return bool
  */
 function xmldb_supervideotracker_upgrade(int $oldversion): bool {
+    if ($oldversion < 2026100603) {
+        upgrade_mod_savepoint(true, 2026100603, 'supervideotracker');
+    }
+
     return true;
 }
