@@ -42,6 +42,13 @@ $capabilities = [
             'manager' => CAP_ALLOW,
         ],
     ],
+    'mod/supervideotracker:betracked' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'student' => CAP_ALLOW,
+        ],
+    ],
     'mod/supervideotracker:manageitems' => [
         'riskbitmask' => RISK_XSS,
         'captype' => 'write',
