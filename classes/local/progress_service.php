@@ -189,21 +189,17 @@ final class progress_service {
      *
      * @param stdClass $item Item.
      * @param stdClass|null $progress Bridge progress.
-     * @param bool $report Whether overdue should be distinguished.
      * @param int|null $now Current timestamp.
      * @return string Status key.
      */
     public static function status(
         stdClass $item,
         ?stdClass $progress,
-        bool $report = false,
         ?int $now = null
     ): string {
-        $now ??= time();
         $percent = $progress ? (float)$progress->percent : 0.0;
-        if ($report && !empty($item->active) && !empty($item->availableuntil)
-                && $now > (int)$item->availableuntil && $percent < (float)$item->minpercent) {
-            return 'overdue';
+        if ($percent >= (float)$item->minpercent) {
+            return 'completed';
         }
         if (!self::is_available($item, $now)) {
             return 'unavailable';
@@ -211,10 +207,33 @@ final class progress_service {
         if ($percent <= 0) {
             return 'notstarted';
         }
+        return 'inprogress';
+    }
+
+    /**
+     * Derives report status, distinguishing incomplete expired items as overdue.
+     *
+     * A completed item remains completed after its availability window closes.
+     *
+     * @param stdClass $item Item.
+     * @param stdClass|null $progress Bridge progress.
+     * @param int|null $now Current timestamp.
+     * @return string Status key.
+     */
+    public static function report_status(
+        stdClass $item,
+        ?stdClass $progress,
+        ?int $now = null
+    ): string {
+        $now ??= time();
+        $percent = $progress ? (float)$progress->percent : 0.0;
         if ($percent >= (float)$item->minpercent) {
             return 'completed';
         }
-        return 'inprogress';
+        if (!empty($item->active) && !empty($item->availableuntil) && $now > (int)$item->availableuntil) {
+            return 'overdue';
+        }
+        return self::status($item, $progress, $now);
     }
 
     /**
