@@ -77,6 +77,13 @@ if ($action && $itemid) {
             exit;
         }
 
+        $mediahash = \mod_supervideotracker\local\progress_service::media($item)->get_mediahash();
+        \local_video_bridge\progress\manager::delete_consumer_media(
+            $context->id,
+            'mod_supervideotracker',
+            (int)$activity->id,
+            $mediahash
+        );
         (new \local_video_bridge\source\manager())->delete_files_for_media($context, (int)$item->id);
         (new \local_video_bridge\caption\manager())->delete_files_for_media($context, (int)$item->id);
         $DB->delete_records('supervideotracker_items', ['id' => $item->id]);
