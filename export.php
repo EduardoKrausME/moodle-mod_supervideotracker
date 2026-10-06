@@ -61,7 +61,7 @@ foreach ($users as $user) {
     $line = [fullname($user)];
     foreach ($items as $item) {
         $progress = $userprogress[(int)$item->id] ?? null;
-        $status = progress_service::status($item, $progress, true);
+        $status = progress_service::report_status($item, $progress);
         $line[] = ($progress ? (int)$progress->percent : 0) . '% - ' .
             get_string($status, 'supervideotracker');
     }
