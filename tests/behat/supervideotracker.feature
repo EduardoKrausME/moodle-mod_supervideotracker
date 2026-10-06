@@ -18,7 +18,7 @@ Feature: Create and open a Super Video Tracker package
   Scenario: Create the package
     Given I log in as "teacher1"
     And I am on "Compliance course" course homepage with editing mode on
-    When I add a "Super Video Tracker" activity to course "Compliance course" section "1" and I fill the form with:
+    When I add a "supervideotracker" activity to course "Compliance course" section "1" and I fill the form with:
       | Name | Mandatory training |
     Then I should see "Mandatory training"
     When I follow "Mandatory training"
