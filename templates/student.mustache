@@ -1,0 +1,32 @@
+{{!
+    @template mod_supervideotracker/student
+}}
+<div class="supervideotracker">
+    <a class="btn btn-link px-0 mb-3" href="{{backurl}}">← {{#str}}report, supervideotracker{{/str}}</a>
+    <div class="supervideotracker__student-heading">
+        <div>
+            <h2>{{fullname}}</h2>
+            <span>{{#str}}overallprogress, supervideotracker{{/str}}</span>
+        </div>
+        <strong>{{overall}}%</strong>
+    </div>
+
+    {{#items}}
+    <section class="supervideotracker__detail">
+        <div class="supervideotracker__detail-head">
+            <h3>{{title}}</h3>
+            <strong>{{percent}}% · {{status}}</strong>
+        </div>
+        <div class="supervideotracker__meta">
+            <span>{{#str}}duration, supervideotracker{{/str}}: {{duration}}</span>
+            <span>{{#str}}currentposition, supervideotracker{{/str}}: {{currentposition}}</span>
+            <span>{{#str}}lastview, supervideotracker{{/str}}: {{lastview}}</span>
+        </div>
+        {{#hasmap}}
+        <div class="supervideotracker__viewmap" aria-label="{{#str}}viewingmap, supervideotracker{{/str}}">
+            {{#buckets}}<span class="{{#watched}}is-watched{{/watched}}" title="{{title}}"></span>{{/buckets}}
+        </div>
+        {{/hasmap}}
+    </section>
+    {{/items}}
+</div>

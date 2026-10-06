@@ -1,0 +1,46 @@
+{{!
+    @template mod_supervideotracker/report
+}}
+<div class="supervideotracker">
+    <div class="supervideotracker__actions my-3">
+        <a class="btn btn-secondary" href="{{backurl}}">{{#str}}backtopackage, supervideotracker{{/str}}</a>
+        <a class="btn btn-primary" href="{{exporturl}}">{{#str}}exportcsv, supervideotracker{{/str}}</a>
+    </div>
+
+    <div class="supervideotracker__summary">
+        <div><strong>{{notstarted}}</strong><span>{{#str}}summary_notstarted, supervideotracker{{/str}}</span></div>
+        <div><strong>{{inprogress}}</strong><span>{{#str}}summary_inprogress, supervideotracker{{/str}}</span></div>
+        <div><strong>{{completed}}</strong><span>{{#str}}summary_completed, supervideotracker{{/str}}</span></div>
+        <div><strong>{{overdue}}</strong><span>{{#str}}summary_overdue, supervideotracker{{/str}}</span></div>
+    </div>
+
+    {{^hasitems}}<div class="alert alert-info">{{#str}}novideos, supervideotracker{{/str}}</div>{{/hasitems}}
+    {{#hasitems}}
+    <div class="table-responsive mt-3">
+        <table class="table table-striped table-hover supervideotracker__matrix">
+            <thead>
+                <tr>
+                    <th>{{#str}}learner, supervideotracker{{/str}}</th>
+                    {{#items}}<th>{{title}}</th>{{/items}}
+                    <th>{{#str}}overall, supervideotracker{{/str}}</th>
+                    <th>{{#str}}details, supervideotracker{{/str}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#rows}}
+                <tr>
+                    <th scope="row">{{fullname}}</th>
+                    {{#cells}}
+                    <td class="supervideotracker__cell supervideotracker__cell--{{statuskey}}">
+                        <strong>{{percent}}%</strong><br><small>{{status}}</small>
+                    </td>
+                    {{/cells}}
+                    <td><strong>{{overall}}%</strong></td>
+                    <td><a href="{{detailsurl}}">{{#str}}details, supervideotracker{{/str}}</a></td>
+                </tr>
+                {{/rows}}
+            </tbody>
+        </table>
+    </div>
+    {{/hasitems}}
+</div>
