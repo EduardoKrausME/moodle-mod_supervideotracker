@@ -38,7 +38,7 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('modulenameplural', 'supervideotracker'));
 
 if (!$instances) {
-    echo $OUTPUT->notification(get_string('none'));
+    echo $OUTPUT->notification(get_string('nothingtodisplay'), 'info');
 } else {
     $table = new html_table();
     $table->head = [get_string('name'), get_string('sectionname', 'format_' . $course->format)];
