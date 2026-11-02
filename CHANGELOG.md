@@ -2,6 +2,13 @@
 
 This changelog documents only the two most recent published GitHub releases. Each entry describes verified changes between its release tag and the immediately preceding published release. Later changes on `master` are excluded.
 
+## 1.0.5 - 2026-10-29
+
+- Displayed an informational notice when the activity list is empty.
+- Rebuilt the player AMD asset and updated release workflow configuration.
+
+**Full comparison:** [1.0.4...1.0.5](https://github.com/EduardoKrausME/moodle-mod_supervideotracker/compare/1.0.4...1.0.5)
+
 ## 1.0.4 - 2026-10-15
 
 ### Changed
